@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import {
+  requestState
+ } from './redux/actions/falconeSelectors';
+
+import {
+  postTokenRequest
+} from './redux/actions/falconeActions';
 
 import Button from './components/Button/Button'
 
@@ -17,15 +26,25 @@ class App extends Component {
             King Shan has received intelligence that Al Falcone is hiding in one of six neighbouring planets.
           </h5>
         </div>
-        <Button 
+        <Button
         buttonContent={'Start to find Falcone'}
-        buttonAction={this.startQuest} />   
+        buttonAction={this.startQuest} />
       </div>
     );
   }
   startQuest = () => {
-    console.log('compra una tastiera inglese')
+    this.props.postTokenRequest()
   }
 }
 
-export default App;
+function mapStateToProps(state, ownProps) {
+  return {
+    token: requestState(state)
+  }
+}
+
+const mapDispatchToProps = {
+  postTokenRequest
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
