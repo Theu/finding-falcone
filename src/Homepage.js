@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  requestState
+  getToken,
+  getPlanets,
+  getVehicles
  } from './redux/actions/falconeSelectors';
 
 import {
-  postTokenRequest
+  TOKEN_POST_REQUEST,
+  PLANET_GET_REQUEST,
+  VEHICLES_GET_REQUEST
 } from './redux/actions/falconeActions';
 
 import Button from './components/Button/Button'
@@ -33,18 +37,24 @@ class App extends Component {
     );
   }
   startQuest = () => {
-    this.props.postTokenRequest()
+    this.props.TOKEN_POST_REQUEST();
+    this.props.PLANET_GET_REQUEST();
+    this.props.VEHICLES_GET_REQUEST();
   }
 }
 
 function mapStateToProps(state, ownProps) {
   return {
-    token: requestState(state)
+    token: getToken(state),
+    planets: getPlanets(state),
+    vehicles: getVehicles(state)
   }
 }
 
 const mapDispatchToProps = {
-  postTokenRequest
+  TOKEN_POST_REQUEST,
+  PLANET_GET_REQUEST,
+  VEHICLES_GET_REQUEST
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
