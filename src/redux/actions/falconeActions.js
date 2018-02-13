@@ -27,7 +27,7 @@ export function PLANET_GET_REQUEST() {
             const requestPlanets = baseURL.get('planets')
             dispatch(getPlanets(await requestPlanets))
         } catch (error) {
-            console.log('PLANETS ERROR', error);
+            console.log('PLANETS ERROR', error.response);
         }
     }
 }

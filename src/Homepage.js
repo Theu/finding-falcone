@@ -18,7 +18,26 @@ import Button from './components/Button/Button'
 import './Homepage.css';
 
 class App extends Component {
+  constructor(props, context) {
+    super(props);
+    this.state = {
+      token: '',
+      planets: [],
+      vehicles: []
+    }
+  }
+  componentWillMount() {
+    this.props.TOKEN_POST_REQUEST();
+    this.props.PLANET_GET_REQUEST();
+    this.props.VEHICLES_GET_REQUEST();
+  }
   render() {
+    const {
+      token,
+      planets,
+      vehicles
+    } = this.props
+    const linkPath = (token !== undefined && planets.length > 0 && vehicles.length > 0) ? 'pageSelector' : 'errorPage';
     return (
       <div className="homepage-wrapper">
         <h1>Finding Falcone</h1>
@@ -32,14 +51,10 @@ class App extends Component {
         </div>
         <Button
         buttonContent={'Start to find Falcone'}
-        buttonAction={this.startQuest} />
+        // buttonAction={this.startQuest}
+        buttonLink={linkPath} />
       </div>
     );
-  }
-  startQuest = () => {
-    this.props.TOKEN_POST_REQUEST();
-    this.props.PLANET_GET_REQUEST();
-    this.props.VEHICLES_GET_REQUEST();
   }
 }
 
