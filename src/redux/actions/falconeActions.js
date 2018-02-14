@@ -5,7 +5,7 @@ import {
 } from './actionsCreator';
 
 import {
-    baseURL,
+    axiosDefault,
     config
 } from '../../tools/axiosConfiguration';
 
@@ -13,7 +13,7 @@ import {
 export function TOKEN_POST_REQUEST() {
     return async dispatch => {
         try {
-            const requestToken = baseURL.post('token', null, config)
+            const requestToken = axiosDefault.post('token', null, config)
             dispatch(getToken(await requestToken))
         } catch (error) {
             console.log('TOKEN ERROR', error);
@@ -21,11 +21,12 @@ export function TOKEN_POST_REQUEST() {
     }
 }
 
+const getRequest = async (endpoint) => axiosDefault.get(endpoint);
+
 export function PLANET_GET_REQUEST() {
     return async dispatch => {
         try {
-            const requestPlanets = baseURL.get('planets')
-            dispatch(getPlanets(await requestPlanets))
+            dispatch(getPlanets(await getRequest('planets')));
         } catch (error) {
             console.log('PLANETS ERROR', error.response);
         }
@@ -35,8 +36,7 @@ export function PLANET_GET_REQUEST() {
 export function VEHICLES_GET_REQUEST() {
     return async dispatch => {
         try {
-            const requestVehicles = baseURL.get('vehicles')
-            dispatch(getVehicles(await requestVehicles))
+            dispatch(getVehicles(await getRequest('vehicles')));
         } catch (error) {
             console.log('VEHICLES ERROR', error);
         }
