@@ -9,6 +9,8 @@ import configureStore from './redux/store/configureStore'
 import registerServiceWorker from './registerServiceWorker';
 
 import Homepage from './Homepage';
+import SelectorPage from './SelectorPage';
+import ErrorPage from './ErrorPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
@@ -23,6 +25,8 @@ render(
                 <Header />
                     <div className='children-wrapper'>
                         <Route exact path='/' component={Homepage} />
+                        <Route path='/pageSelector' component={SelectorPage} />
+                        <Route path='/errorPage' component={ErrorPage} />
                     </div>
                 <Footer />
             </div>

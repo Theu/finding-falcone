@@ -1,20 +1,44 @@
 import {
-    getToken
+    getToken,
+    getPlanets,
+    getVehicles
 } from './actionsCreator';
 
 import {
-    baseURL,
+    axiosDefault,
     config
 } from '../../tools/axiosConfiguration';
 
 
-export function postTokenRequest() {
+export function TOKEN_POST_REQUEST() {
     return async dispatch => {
         try {
-            const requestToken = baseURL.post('token', null, config)
+            const requestToken = axiosDefault.post('token', null, config)
             dispatch(getToken(await requestToken))
         } catch (error) {
             console.log('TOKEN ERROR', error);
+        }
+    }
+}
+
+const getRequest = async (endpoint) => axiosDefault.get(endpoint);
+
+export function PLANET_GET_REQUEST() {
+    return async dispatch => {
+        try {
+            dispatch(getPlanets(await getRequest('planets')));
+        } catch (error) {
+            console.log('PLANETS ERROR', error.response);
+        }
+    }
+}
+
+export function VEHICLES_GET_REQUEST() {
+    return async dispatch => {
+        try {
+            dispatch(getVehicles(await getRequest('vehicles')));
+        } catch (error) {
+            console.log('VEHICLES ERROR', error);
         }
     }
 }
