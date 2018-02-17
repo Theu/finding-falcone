@@ -25,6 +25,8 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
     switch(action.type) {
         case GET_TOKEN_START:
+        case GET_VEHICLES_START:
+        case GET_PLANETS_START:
             return {
                 ...state,
                 isloading: true,
@@ -37,41 +39,11 @@ export default function rootReducer(state = initialState, action) {
                 token: action.request.data.token
         }
 
-        case GET_TOKEN_ERROR:
-            return {
-                ...state,
-                isLoading: false,
-                isError: true,
-                errorType: action.type,
-                errorMessage: action.error.message
-        }
-
-        case GET_PLANETS_START:
-            return {
-                ...state,
-                isloading: true,
-        }
-
         case GET_PLANETS_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
                 planets: action.request.data
-        }
-
-        case GET_PLANETS_ERROR:
-            return {
-                ...state,
-                isLoading: false,
-                isError: true,
-                errorType: action.type,
-                errorMessage: action.error.message
-        }
-
-        case GET_VEHICLES_START:
-            return {
-                ...state,
-                isloading: true,
         }
 
         case GET_VEHICLES_SUCCESS:
@@ -81,6 +53,8 @@ export default function rootReducer(state = initialState, action) {
                 vehicles: action.request.data
         }
 
+        case GET_TOKEN_ERROR:
+        case GET_PLANETS_ERROR:
         case GET_VEHICLES_ERROR:
             return {
                 ...state,
@@ -89,6 +63,7 @@ export default function rootReducer(state = initialState, action) {
                 errorType: action.type,
                 errorMessage: action.error.message
         }
+        
         default:
             return state
     }
