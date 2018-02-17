@@ -33,9 +33,30 @@ export function getTokenError(error) {
     }
 }
 
+export function getPlanetsStart(request) {
+    return {
+        type: GET_PLANETS_START,
+        request
+    }
+}
+
 export function getPlanetsSuccess(request) {
     return {
         type: GET_PLANETS_SUCCESS,
+        request
+    }
+}
+
+export function getPlanetsError(error) {
+    return {
+        type: GET_PLANETS_ERROR,
+        error
+    }
+}
+
+export function getVehiclesStart(request) {
+    return {
+        type: GET_VEHICLES_START,
         request
     }
 }
@@ -44,5 +65,12 @@ export function getVehiclesSuccess(request) {
     return {
         type: GET_VEHICLES_SUCCESS,
         request
+    }
+}
+
+export function getVehiclesError(error) {
+    return {
+        type: GET_VEHICLES_ERROR,
+        error
     }
 }

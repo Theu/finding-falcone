@@ -8,8 +8,10 @@ const config = {
     }
 }
 
+
 export function consumeApi(axios) {
     return {
-        requestTokenToServer: () => axiosInstance.post('token', null, config)
+        requestTokenToServer: () => axiosInstance.post('token', null, config),
+        requestPlanetsOrVehiclesServer: (endPoint) => axiosInstance.get(endPoint)
     }
 }

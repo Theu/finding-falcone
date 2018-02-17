@@ -44,18 +44,51 @@ export default function rootReducer(state = initialState, action) {
                 isError: true,
                 errorType: action.type,
                 errorMessage: action.error.message
-            }
+        }
+
+        case GET_PLANETS_START:
+            return {
+                ...state,
+                isloading: true,
+        }
 
         case GET_PLANETS_SUCCESS:
             return {
                 ...state,
+                isLoading: false,
                 planets: action.request.data
-            }
+        }
+
+        case GET_PLANETS_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                errorType: action.type,
+                errorMessage: action.error.message
+        }
+
+        case GET_VEHICLES_START:
+            return {
+                ...state,
+                isloading: true,
+        }
+
         case GET_VEHICLES_SUCCESS:
             return {
                 ...state,
+                isLoading: false,
                 vehicles: action.request.data
-            }
+        }
+
+        case GET_VEHICLES_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                errorType: action.type,
+                errorMessage: action.error.message
+        }
         default:
             return state
     }

@@ -10,9 +10,9 @@ import {
  } from './redux/actions/falconeSelectors';
 
 import {
-  token_get_success
-  // PLANET_GET_REQUEST,
-  // VEHICLES_GET_REQUEST
+  token_get_success,
+  planets_get_success,
+  vehicles_get_success
 } from './redux/actions/falconeActions';
 
 import ErrorHandler from './ErrorHandler';
@@ -31,14 +31,11 @@ class App extends Component {
   }
   componentWillMount() {
     this.props.token_get_success()
-    // this.props.PLANET_GET_REQUEST();
-    // this.props.VEHICLES_GET_REQUEST();
+    this.props.planets_get_success();
+    this.props.vehicles_get_success()
   }
   render() {
     const {
-      token,
-      planets,
-      vehicles,
       isError,
       errorMessage
     } = this.props
@@ -70,6 +67,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  console.log('STATE', state);
   return {
     token: getToken(state),
     planets: getPlanets(state),
@@ -80,9 +78,9 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = {
-  token_get_success
-  // PLANET_GET_REQUEST,
-  // VEHICLES_GET_REQUEST
+  token_get_success,
+  planets_get_success,
+  vehicles_get_success
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
