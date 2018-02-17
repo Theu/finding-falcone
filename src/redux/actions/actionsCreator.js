@@ -12,10 +12,24 @@ import {
     GET_VEHICLES_ERROR
 } from './actionTypes';
 
+export function getTokenStart(request) {
+    return {
+        type: GET_TOKEN_START,
+        request
+    }
+}
+
 export function getTokenSuccess(request) {
     return {
         type: GET_TOKEN_SUCCESS,
         request
+    }
+}
+
+export function getTokenError(error) {
+    return {
+        type: GET_TOKEN_ERROR,
+        error
     }
 }
 

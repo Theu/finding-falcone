@@ -24,11 +24,28 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action) {
     switch(action.type) {
+        case GET_TOKEN_START:
+            return {
+                ...state,
+                isloading: true,
+        }
+
         case GET_TOKEN_SUCCESS:
             return {
                 ...state,
+                isLoading: false,
                 token: action.request.data.token
+        }
+
+        case GET_TOKEN_ERROR:
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                errorType: action.type,
+                errorMessage: action.error.message
             }
+
         case GET_PLANETS_SUCCESS:
             return {
                 ...state,
