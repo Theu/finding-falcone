@@ -1,7 +1,7 @@
 import {
-    getToken,
-    getPlanets,
-    getVehicles
+    getTokenSuccess,
+    getPlanetsSuccess,
+    getVehiclesSuccess
 } from './actionsCreator';
 
 import {
@@ -10,7 +10,7 @@ import {
 } from '../../tools/axiosConfiguration';
 
 
-export function TOKEN_POST_REQUEST() {
+export function token_get_success() {
     return async dispatch => {
         try {
             const requestToken = axiosDefault.post('token', null, config)

@@ -8,7 +8,7 @@ import {
  } from './redux/actions/falconeSelectors';
 
 import {
-  TOKEN_POST_REQUEST,
+  token_get_success,
   PLANET_GET_REQUEST,
   VEHICLES_GET_REQUEST
 } from './redux/actions/falconeActions';
@@ -67,7 +67,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = {
-  TOKEN_POST_REQUEST,
+  token_get_success,
   PLANET_GET_REQUEST,
   VEHICLES_GET_REQUEST
 }
