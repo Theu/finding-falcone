@@ -5,9 +5,7 @@
     justify-content: center;
     flex: 1;
     margin: 0 auto;
-    background-color: black;
-    color: blue;
-    border: 1px solid blue; 
+    border: 1px solid black; 
   }
   
   .start-button {

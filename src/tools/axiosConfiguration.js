@@ -1,9 +1,17 @@
 import axios from 'axios';
 
-export const axiosDefault = axios.create({baseURL: 'https://findfalcone.herokuapp.com/'})
+export const axiosInstance = axios.create({baseURL: 'https://findfalcone.herokuapp.com/'})
 
-export const config = {
+const config = {
     headers: {
         Accept: 'application/json'
+    }
+}
+
+
+export function consumeApi(axios) {
+    return {
+        requestTokenToServer: () => axiosInstance.post('token', null, config),
+        requestPlanetsOrVehiclesServer: (endPoint) => axiosInstance.get(endPoint)
     }
 }
