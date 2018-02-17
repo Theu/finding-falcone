@@ -1,8 +1,12 @@
 import React from 'react';
 
+import Menu from './components/Menu/Menu'
+
 class SelectorPage extends React.Component {
     render() {
-        return <h5>play with ME</h5>
+        return (
+            <Menu />
+        )
     }
 }
 
