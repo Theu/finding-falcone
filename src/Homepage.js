@@ -30,9 +30,7 @@ class App extends Component {
     }
   }
   componentWillMount() {
-    this.props.token_get_success()
-    this.props.planets_get_success();
-    this.props.vehicles_get_success()
+    this.props.token_get_success();
   }
   render() {
     const {
@@ -67,7 +65,6 @@ class App extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('STATE', state);
   return {
     token: getToken(state),
     planets: getPlanets(state),
