@@ -47,7 +47,12 @@ class App extends Component {
     const usePlanets = Object.entries(planets).map(([key, value]) => {
       return {name: value.name, distance: value.distance}
     })
-    console.log('usePlanets', usePlanets);
+    console.log('planets', planets);
+    console.log('usePlanets', usePlanets.map((planet, key) => {
+      console.log(key);
+      console.log('name', planet.name);
+      console.log('distance', planet.distance);
+    }));
     return (
       <div className="homepage-wrapper">
         <h1>Finding Falcone</h1>
