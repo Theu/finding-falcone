@@ -44,14 +44,18 @@ class App extends Component {
     
     const linkPath = 'pageSelector';
     console.log('vehiclesclient', planets);
-    const usePlanets = Object.entries(planets).map(([key, value]) => {
-      return {name: value.name, distance: value.distance}
-    })
-    console.log('planets', planets);
-    console.log('usePlanets', usePlanets.map((planet, key) => {
+    
+    console.log('usePlanets', planets.map((planet, key) => {
       console.log(key);
       console.log('name', planet.name);
       console.log('distance', planet.distance);
+    }));
+
+    console.log('useVehicles', vehicles.map((vehicles, key) => {
+      console.log('name_veh', vehicles.name);
+      console.log('name_tono', vehicles.total_no);
+      console.log('name_maxdis', vehicles.max_distance);
+      console.log('name_speed', vehicles.speed);
     }));
     return (
       <div className="homepage-wrapper">
