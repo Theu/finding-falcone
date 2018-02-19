@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import spaceReducer from './spaceReducer';
+import tokenReducer from './tokenReducer';
 
 const rootReducer = combineReducers({
-    space: spaceReducer
+    token: tokenReducer
 });
 
 export default rootReducer;

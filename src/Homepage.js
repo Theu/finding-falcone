@@ -6,14 +6,14 @@ import {
   getPlanets,
   getVehicles,
   getError,
-  getErrorMessage
+  hasError
  } from './redux/actions/falconeSelectors';
 
 import {
-  token_get_success,
-  planets_get_success,
-  vehicles_get_success
-} from './redux/actions/falconeActions';
+  obtainToken,
+  obtainPlanets,
+  obtainVehicles
+} from './redux/actions/actionsCreator';
 
 import ErrorHandler from './ErrorHandler';
 import Button from './components/Button/Button';
@@ -30,17 +30,24 @@ class App extends Component {
     }
   }
   componentWillMount() {
-    this.props.token_get_success()
-    this.props.planets_get_success();
-    this.props.vehicles_get_success()
+    this.props.obtainToken();
+    this.props.obtainPlanets()
+    this.props.obtainVehicles()
   }
   render() {
     const {
-      isError,
-      errorMessage
+      error,
+      hasError,
+      planets,
+      vehicles
     } = this.props
-    const linkPath = 'pageSelector';
     
+    const linkPath = 'pageSelector';
+    console.log('vehiclesclient', planets);
+    const usePlanets = Object.entries(planets).map(([key, value]) => {
+      return {name: value.name, distance: value.distance}
+    })
+    console.log('usePlanets', usePlanets);
     return (
       <div className="homepage-wrapper">
         <h1>Finding Falcone</h1>
@@ -52,9 +59,9 @@ class App extends Component {
             King Shan has received intelligence that Al Falcone is hiding in one of six neighbouring planets.
           </h5>
         </div>
-        {isError ?
+        {hasError ?
           <ErrorHandler
-            faillureReason={errorMessage} />
+            faillureReason={error[0]} />
         :
           <Button
             buttonContent={'Start to find Falcone'}
@@ -67,20 +74,19 @@ class App extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('STATE', state);
   return {
     token: getToken(state),
     planets: getPlanets(state),
     vehicles: getVehicles(state),
-    isError: getError(state),
-    errorMessage: getErrorMessage(state)
+    error: getError(state),
+    hasError: hasError(state)
   }
 }
 
 const mapDispatchToProps = {
-  token_get_success,
-  planets_get_success,
-  vehicles_get_success
+  obtainToken,
+  obtainPlanets,
+  obtainVehicles
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
