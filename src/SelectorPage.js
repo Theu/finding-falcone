@@ -1,13 +1,58 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-import Menu from './components/Menu/Menu'
+import {obtainPlanets} from './redux/actions/actionsCreator';
+import {getPlanets} from './redux/actions/falconeSelectors';
+
+import ButtonPlanet from './components/Button/ButtonPlanet'
+
 
 class SelectorPage extends React.Component {
+    
+    
+    componentWillMount() {
+        this.props.obtainPlanets();
+    }
+    
     render() {
+        const {
+            planets
+        } = this.props
+        const planetList = (planets).map((planet, item) => {
+            return  (
+                // <li 
+                //     key={item}
+                //     onClick={this.choosePlanet}>
+                //     {planet.name}
+                // </li>
+            );
+        });
         return (
-            <Menu />
+            <div>
+                <ButtonPlanet
+                    planetList={planetList} />
+                <ButtonPlanet
+                    planetList={planetList} />
+                <ButtonPlanet
+                    planetList={planetList} />
+                <ButtonPlanet
+                    planetList={planetList} />
+            </div>
         )
+    }
+    choosePlanet = (event) => {
+        console.log(event.target);
     }
 }
 
-export default SelectorPage;
+function mapStateToProps(state) {
+    return {
+        planets: getPlanets(state)
+    }
+}
+
+const mapDispatchToProps = {
+    obtainPlanets
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectorPage);
