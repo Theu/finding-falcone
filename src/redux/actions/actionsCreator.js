@@ -1,76 +1,98 @@
 import {
-    GET_TOKEN_START,
-    GET_TOKEN_SUCCESS,
+    GET_TOKEN,
     GET_TOKEN_ERROR,
-    
-    GET_PLANETS_START,
-    GET_PLANETS_SUCCESS,
-    GET_PLANETS_ERROR, 
-    
-    GET_VEHICLES_START,
-    GET_VEHICLES_SUCCESS,
+
+    GET_PLANETS,
+    GET_PLANETS_ERROR,
+
+    GET_VEHICLES,
     GET_VEHICLES_ERROR
 } from './actionTypes';
 
-export function getTokenStart(request) {
+import {
+    consumeApi,
+    axiosInstance
+} from '../../tools/axiosConfiguration';
+
+const {
+    requestTokenToServer,
+    requestPlanetsOrVehiclesServer
+} = consumeApi(axiosInstance)
+
+function fetchToken(token) {
     return {
-        type: GET_TOKEN_START,
-        request
+        type: GET_TOKEN,
+        payload: token
     }
 }
 
-export function getTokenSuccess(request) {
-    return {
-        type: GET_TOKEN_SUCCESS,
-        request
-    }
-}
-
-export function getTokenError(error) {
+function fetchTokenError(error) {
     return {
         type: GET_TOKEN_ERROR,
-        error
+        payload: error
     }
 }
 
-export function getPlanetsStart(request) {
+function fetchPlanets(planets) {
     return {
-        type: GET_PLANETS_START,
-        request
+        type: GET_PLANETS,
+        payload: planets
     }
 }
 
-export function getPlanetsSuccess(request) {
-    return {
-        type: GET_PLANETS_SUCCESS,
-        request
-    }
-}
-
-export function getPlanetsError(error) {
+function fetchPlanetsError(error) {
     return {
         type: GET_PLANETS_ERROR,
-        error
+        payload: error
     }
 }
 
-export function getVehiclesStart(request) {
+function fetchVehicles(vehicles) {
     return {
-        type: GET_VEHICLES_START,
-        request
+        type: GET_VEHICLES,
+        payload: vehicles
     }
 }
 
-export function getVehiclesSuccess(request) {
-    return {
-        type: GET_VEHICLES_SUCCESS,
-        request
-    }
-}
-
-export function getVehiclesError(error) {
+function fetchVehiclesError(error) {
     return {
         type: GET_VEHICLES_ERROR,
-        error
+        payload: error
+    }
+}
+
+export function obtainToken() {
+    return dispatch => {
+        requestTokenToServer()
+        .then(response => {
+            dispatch(fetchToken(response.data.token))
+        })
+        .catch(error => {
+            dispatch(fetchTokenError(error))
+        })
+    }
+}
+
+export function obtainPlanets() {
+    return dispatch => {
+        requestPlanetsOrVehiclesServer('planets')
+        .then(response => {
+            dispatch(fetchPlanets(response.data))
+        })
+        .catch(error => {
+            dispatch(fetchPlanetsError(error))
+        })
+    }
+}
+
+export function obtainVehicles() {
+    return dispatch => {
+        requestPlanetsOrVehiclesServer('vehicles')
+        .then(response => {
+            dispatch(fetchVehicles(response.data))
+        })
+        .catch(error => {
+            dispatch(fetchVehiclesError(error))
+        })
     }
 }
