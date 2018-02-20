@@ -29,8 +29,7 @@ export default function tokenReducer(state = initialState, action) {
         case GET_TOKEN_ERROR:
             return {
                 ...state,
-                isLoading: false,
-                error: [action.payload.message, action.payload.response.status]
+                error: [action.payload.message, action.payload.response]
             }
 
         case GET_PLANETS:
@@ -43,8 +42,7 @@ export default function tokenReducer(state = initialState, action) {
         case GET_PLANETS_ERROR:
             return {
                 ...state,
-                isLoading: false,
-                error: [action.payload.message, action.payload.response.status]
+                error: [action.payload.message, action.payload.response]
             }
         
         case GET_VEHICLES:
@@ -57,8 +55,7 @@ export default function tokenReducer(state = initialState, action) {
         case GET_VEHICLES_ERROR:
             return {
                 ...state,
-                isLoading: false,
-                error: [action.payload.message, action.payload.response.status]
+                error: [action.payload.message, action.payload.response]
             }
         
         default:
